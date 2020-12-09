@@ -24,7 +24,8 @@ class MovieRepository extends BaseRepository
 
 	public function findByGenre($genre)
 	{
-		$this->query['with_genre'] = $genre;
+		$this->setOptions(['with_genres' => $genre]);
+		// dd($this->options);
 		return $this->http::get($this->base_url.'discover/movie', $this->options)['results'];
 	}
 

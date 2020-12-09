@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\MovieRepository;
+use Illuminate\Support\Arr;
 
 class MovieService
 {
@@ -11,7 +12,6 @@ class MovieService
 	public function __construct(MovieRepository $movieRepository) 
 	{
 		$this->repository = $movieRepository;
-		$this->repository->setOptions(['sort_by' => 'original_title.asc']);
 	}
 
 	public function showTrendingMovies()
@@ -46,6 +46,10 @@ class MovieService
 		foreach ($movies as $key => $movie) {
 			$movies[$key] = collect($movie)->only(['id', 'title', 'genre_ids', 'poster_path', 'overview'])->all();
 		}
+
+		// uasort($movies, function($a, $b){
+		//     return strcmp($a['title'], $b['title']);
+		// });
 
 		return $movies;
 	}

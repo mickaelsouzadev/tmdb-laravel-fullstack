@@ -20,7 +20,7 @@ class BaseRepository
 		$this->options['api_key'] = $this->api_key; 
 	}
 
-	public function setOptions(array $options)
+	protected function setOptions(array $options)
 	{
 		foreach ($options as $key => $value) {
 			$this->options[$key] = $value;
