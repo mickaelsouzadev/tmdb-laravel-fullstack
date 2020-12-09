@@ -6,29 +6,36 @@ use App\Repositories\MovieRepository;
 
 class MovieService
 {
+	private $repository;
+
 	public function __construct(MovieRepository $movieRepository) 
 	{
-		$this->movieRepository = $movieRepository;
+		$this->repository = $movieRepository;
+		$this->repository->setOptions(['sort_by' => 'original_title.asc']);
 	}
 
 	public function showTrendingMovies()
 	{
-		$movies = $this->movieRepository->findTrending();
+		$movies = $this->repository->findTrending();
 	
 		return $this->formatMovies($movies);
 	}
 
 	public function showMovieDetails($id)
 	{
-		$movie = $this->movieRepository->find($id);
-		dd($movie);
+		$movie = $this->repository->find($id);
+		
 		return $this->formatOnlyOneMovie($movie);
 	}
 
-	public function showMovieByName() {}
+	public function showMoviesByName($name) {
+		$movies = $this->repository->findByName($name);
+
+		return $this->formatMovies($movies);
+	}
 
 	public function showMoviesByGenre($genre) {
-		$movies = $this->movieRepository->findByGenre($genre);
+		$movies = $this->repository->findByGenre($genre);
 	
 		return $this->formatMovies($movies);
 	}
@@ -37,7 +44,7 @@ class MovieService
 	{	
 		
 		foreach ($movies as $key => $movie) {
-			$movies[$key] = collect($movie)->only(['id', 'title', 'genre_ids', 'poster_path'])->all();
+			$movies[$key] = collect($movie)->only(['id', 'title', 'genre_ids', 'poster_path', 'overview'])->all();
 		}
 
 		return $movies;
@@ -46,7 +53,7 @@ class MovieService
 	private function formatOnlyOneMovie($movie) 
 	{
 	
-		return collect($movie)->only(['id', 'title', 'genres', 'poster_path']);
+		return collect($movie)->only(['id', 'title', 'genres', 'poster_path', 'overview']);
 	
 	}
 }

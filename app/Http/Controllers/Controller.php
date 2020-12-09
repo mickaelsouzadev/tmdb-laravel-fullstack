@@ -9,5 +9,7 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
+	protected $service;
+	
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 }

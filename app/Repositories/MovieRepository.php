@@ -4,32 +4,28 @@ namespace App\Repositories;
 class MovieRepository extends BaseRepository
 {
 
-	public function all() 
-	{
-		return $this->http::get("{$this->base_url}discover/movie", $this->query)['results'];
-	}
-
 	public function findTrending()
 	{
-		return $this->http::get("{$this->base_url}trending/movie/day", $this->query)['results'];
+		return $this->http::get("{$this->base_url}trending/movie/day", $this->options)['results'];
 
 	}
 
 	public function find($id)
 	{
-		// dd("{$this->base_url}movie/{$id}");
-		return $this->http::get("{$this->base_url}movie/{$id}", $this->only_api_key)->headers();
+		return $this->http::get("{$this->base_url}movie/{$id}", ['api_key' => $this->api_key])->json();
 	}
 
 	public function findByName($name)
 	{
-		// return $this->http::get("{$this->base_url}movie", $this->query)->json();
+		$this->setOptions(['query' => $name]);
+
+		return $this->http::get("{$this->base_url}search/movie", $this->options)['results'];
 	}
 
 	public function findByGenre($genre)
 	{
 		$this->query['with_genre'] = $genre;
-		return $this->http::get($this->base_url.'discover/movie', $this->query)['results'];
+		return $this->http::get($this->base_url.'discover/movie', $this->options)['results'];
 	}
 
 }

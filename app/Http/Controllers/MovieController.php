@@ -7,6 +7,9 @@ use App\Services\MovieService;
 
 class MovieController extends Controller
 {
+
+	protected $service;
+
     public function __construct(MovieService $service)
     {
     	$this->service = $service;
@@ -22,8 +25,13 @@ class MovieController extends Controller
     	return $this->service->showMovieDetails($request->id);
     }
 
-     public function getByGenre(Request $request)
+    public function getByGenre(Request $request)
     {
     	return $this->service->showMoviesByGenre($request->genre);
+    }
+
+    public function getByName(Request $request)
+    {
+    	return $this->service->showMoviesByName($request->name);
     }
 }
