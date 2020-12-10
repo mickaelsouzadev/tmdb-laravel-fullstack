@@ -47,16 +47,13 @@ class MovieService
 			$movies[$key] = collect($movie)->only(['id', 'title', 'genre_ids', 'poster_path', 'overview'])->all();
 		}
 
-		// uasort($movies, function($a, $b){
-		//     return strcmp($a['title'], $b['title']);
-		// });
 
 		return $movies;
 	}
 
 	private function formatOnlyOneMovie($movie) 
 	{
-	
+
 		return collect($movie)->only(['id', 'title', 'genres', 'poster_path', 'overview']);
 	
 	}

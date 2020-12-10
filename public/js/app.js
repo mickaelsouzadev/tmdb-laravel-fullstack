@@ -1983,13 +1983,98 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       movies: [],
       genres: [],
       name: '',
-      path_img: 'https://image.tmdb.org/t/p/w300'
+      path_img: 'https://image.tmdb.org/t/p/w300',
+      modal: false,
+      selected_movie: []
     };
   },
   methods: {
@@ -2121,6 +2206,39 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee4, null, [[0, 8]]);
       }))();
+    },
+    getMovieById: function getMovieById(id) {
+      var _this5 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee5() {
+        var response;
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _this5.modal = true;
+                _context5.next = 4;
+                return axios.get("api/movie/".concat(id));
+
+              case 4:
+                response = _context5.sent;
+                _this5.selected_movie = response.data;
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                console.error("Ocorreu um erro: ", _context5.t0);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 8]]);
+      }))();
     }
   },
   mounted: function mounted() {
@@ -2148,7 +2266,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nbody {\n\tbackground-color: #003049;\n}\n.card {\n\tbackground: none;\n\tcolor: #d62828;\n}\n.btn-red {\n\tbackground-color: #d62828;\n\tcolor: #fff;\n}\n", ""]);
+exports.push([module.i, "\nbody {\n\tbackground-color: #001233;\n}\n.card {\n\tbackground: none;\n\tcolor: #39c0ed;\n}\n.card-top {\n\tborder-radius: 3%;\n}\nh5 {\n\tfont-weight: 300;\n}\n.modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-content {\n\tbackground-color: #001233;\n\tcolor: #39c0ed;\n}\n.modal-content p {\n\tfont-size: 16px;\n}\n", ""]);
 
 // exports
 
@@ -21189,66 +21307,89 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container-fluid" }, [
-    _c("div", { staticClass: "row justify-content-center p-5" }, [
-      _c("div", { staticClass: "col-lg-4 m-5" }, [
-        _c(
-          "select",
-          { ref: "selected", staticClass: "form-control" },
-          [
-            _c("option", { attrs: { value: "" } }, [_vm._v("Select Genre")]),
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-lg-8 p-5" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-lg-6 d-flex flex-row" }, [
+            _c(
+              "select",
+              { ref: "selected", staticClass: "form-control" },
+              [
+                _c("option", { attrs: { value: "" } }, [
+                  _vm._v("Select Genre")
+                ]),
+                _vm._v(" "),
+                _vm._l(_vm.genres, function(genre) {
+                  return _c(
+                    "option",
+                    { key: genre.id, domProps: { value: genre.id } },
+                    [_vm._v(_vm._s(genre.name))]
+                  )
+                })
+              ],
+              2
+            ),
             _vm._v(" "),
-            _vm._l(_vm.genres, function(genre) {
-              return _c(
-                "option",
-                { key: genre.id, domProps: { value: genre.id } },
-                [_vm._v(_vm._s(genre.name))]
-              )
-            })
-          ],
-          2
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-red ml-5",
-            on: { click: _vm.getMoviesByGenre }
-          },
-          [_vm._v("Select")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-lg-4 m-5" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.name,
-              expression: "name"
-            }
-          ],
-          staticClass: "form-control",
-          attrs: { type: "text", placeholder: "Search Your Movie" },
-          domProps: { value: _vm.name },
-          on: {
-            keyup: function($event) {
-              if (
-                !$event.type.indexOf("key") &&
-                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-              ) {
-                return null
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-rounded btn-info ml-2",
+                on: {
+                  click: function($event) {
+                    return _vm.getMoviesByGenre()
+                  }
+                }
+              },
+              [_vm._v("Select")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-lg-6 d-flex flex-row" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.name,
+                  expression: "name"
+                }
+              ],
+              staticClass: "form-control",
+              attrs: { type: "text", placeholder: "Search a Movie" },
+              domProps: { value: _vm.name },
+              on: {
+                keyup: function($event) {
+                  if (
+                    !$event.type.indexOf("key") &&
+                    _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+                  ) {
+                    return null
+                  }
+                  return _vm.getMoviesByName()
+                },
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.name = $event.target.value
+                }
               }
-              return _vm.getMoviesByName()
-            },
-            input: function($event) {
-              if ($event.target.composing) {
-                return
-              }
-              _vm.name = $event.target.value
-            }
-          }
-        })
+            }),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-rounded btn-info ml-2",
+                on: {
+                  click: function($event) {
+                    return _vm.getMoviesByName()
+                  }
+                }
+              },
+              [_vm._v("Search")]
+            )
+          ])
+        ])
       ])
     ]),
     _vm._v(" "),
@@ -21257,22 +21398,127 @@ var render = function() {
       { staticClass: "row justify-content-center" },
       _vm._l(_vm.orderedMovies, function(movie) {
         return _c("div", { key: movie.id, staticClass: "col-lg-2 m-4" }, [
-          _c("div", { staticClass: "card shadow-0" }, [
+          _c("div", { staticClass: "card" }, [
             _c("img", {
-              staticClass: "card-top",
+              staticClass: "card-top rounded shadow-4",
               attrs: { src: _vm.path_img + movie.poster_path }
             }),
             _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title" }, [
+            _c("div", { staticClass: "card-body justify-content-center" }, [
+              _c("h5", { staticClass: "card-title info ml-2" }, [
                 _vm._v(_vm._s(movie.title))
-              ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-rounded btn-info btn-block mt-3",
+                  on: {
+                    click: function($event) {
+                      return _vm.getMovieById(movie.id)
+                    }
+                  }
+                },
+                [_vm._v("Details")]
+              )
             ])
           ])
         ])
       }),
       0
-    )
+    ),
+    _vm._v(" "),
+    _vm.modal
+      ? _c(
+          "div",
+          [
+            _c("transition", { attrs: { name: "modal" } }, [
+              _c("div", { staticClass: "modal-mask" }, [
+                _c("div", { staticClass: "modal-wrapper" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "modal-dialog modal-lg",
+                      attrs: { role: "document" }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-content" }, [
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "modal-body d-flex flex-row justify-content-center"
+                          },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  _vm.path_img + _vm.selected_movie.poster_path,
+                                width: "250"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "col-lg-12 p-3" }, [
+                              _c("h4", [
+                                _vm._v(_vm._s(_vm.selected_movie.title))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "pr-5" }, [
+                                _c("p", { staticClass: "pr-5 mr-5" }, [
+                                  _vm._v(
+                                    "\n\t              \t\t\t\t" +
+                                      _vm._s(_vm.selected_movie.overview) +
+                                      "\n\t              \t\t\t"
+                                  )
+                                ])
+                              ]),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "pr-5 d-flex flex-row" },
+                                [
+                                  _c("p", [_vm._v("Genre(s): ")]),
+                                  _vm._v(" "),
+                                  _vm._l(_vm.selected_movie.genres, function(
+                                    genger
+                                  ) {
+                                    return _c("p", { staticClass: "pl-2" }, [
+                                      _vm._v(
+                                        "\n\t              \t\t\t\t" +
+                                          _vm._s(genger.name) +
+                                          "\n\t              \t\t\t"
+                                      )
+                                    ])
+                                  })
+                                ],
+                                2
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-rounded btn-info mt-3",
+                                  on: {
+                                    click: function($event) {
+                                      _vm.modal = false
+                                    }
+                                  }
+                                },
+                                [_vm._v(" Close Details")]
+                              )
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ])
+            ])
+          ],
+          1
+        )
+      : _vm._e()
   ])
 }
 var staticRenderFns = []
