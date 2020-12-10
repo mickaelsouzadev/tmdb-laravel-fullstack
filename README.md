@@ -13,5 +13,7 @@ After this run ``` composer install ``` command to install all laravel's package
 
 Finally run ```php artisan serve``` and ```npm run dev``` to start laravel server and compile front-end files.
 
-
+```
+php artisan serve && npm run dev
+```
 
