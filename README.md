@@ -1,4 +1,4 @@
-# Full Stack Test
+# TMDB Laravel Fullstack example
 
  I made this application with laravel in back-end(api) and vue in front-end(spa).
 
